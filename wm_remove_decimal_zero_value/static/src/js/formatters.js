@@ -205,6 +205,9 @@ registry.category("formatters").add("monetary", formatMonetary)
 //to override Monetary widget -- it use formatMonetary
 patch(MonetaryField.prototype, {
         get formattedValue() {
+        if (this.props.inputType === "number" && !this.props.readonly && this.value !== undefined && this.value !== null) {
+            return this.value;
+        }
         return formatMonetary(this.value, {
             digits: this.currencyDigits,
             currencyId: this.currencyId,
@@ -216,9 +219,10 @@ patch(MonetaryField.prototype, {
 // Ensure float fields also display formatted values even when editable
 patch(FloatField.prototype, {
     get formattedValue() {
-        return formatFloat(this.value, {
-            digits: this.props.digits,
-        });
+        if (this.props.inputType === "number" && !this.props.readonly && this.value !== undefined && this.value !== null) {
+            return this.value;
+        }
+        return formatFloat(this.value, { digits: this.props.digits });
     }
 });
 
