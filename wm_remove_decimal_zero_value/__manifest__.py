@@ -15,6 +15,7 @@ remove Decimal zeros
 Decimal Precision drop zeros
 Hide Decimal Zero Trailing
 All item last one zero remove
+extra descpripn
     """,
     'license': 'OPL-1',
     'category': 'Extra Tools',
