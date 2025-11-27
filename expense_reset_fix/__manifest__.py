@@ -1,6 +1,6 @@
 {
     'name': 'Expense Reset Fix',
-    'version': '17.0.1.0.0',
+    'version': '17.0.2.0.0',
     'summary': 'When you save the expense form as a draft, the journal entry is also saved as a draft, when you delete the expense form, the journal entry is also deleted',
     'description': """
         In Odoo's default configuration, when you approve an expense form, a journal entry is created.
@@ -19,3 +19,4 @@
     'auto_install': False,
     'application': False,
 }
+
