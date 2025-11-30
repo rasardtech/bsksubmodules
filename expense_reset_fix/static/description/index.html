@@ -1,88 +1,76 @@
 <section class="oe_container">
     <div class="oe_row oe_spaced">
-        <h2 class="oe_slogan" style="color:#875A7B;">Cleaner Expense Management</h2>
-        <h3 class="oe_slogan">Fix the default "Reset to Draft" behavior and keep your Journal Entries clean.</h3>
+        <h2 class="oe_slogan" style="color:#875A7B;">Expense Reset Fix</h2>
+        <h3 class="oe_slogan">Smart Journal Management & Flexible Expense Workflow</h3>
         <div class="oe_span12">
-            <div>
-                <p class="text-justify" style="font-size: 18px; line-height: 1.6; text-align: center; max-width: 800px; margin: 0 auto;">
-                    <b>Expense Reset Fix</b> improves the accounting workflow within the Odoo Expenses app. 
-                    It prevents the creation of unnecessary "Reverse Entries" when resetting an expense report and ensures 
-                    linked Journal Entries are properly deleted when the report is removed.
-                </p>
-            </div>
+            <p class="oe_mt32">
+                In the standard Odoo workflow, correcting a posted expense report can be messy. It generates "Reversal" journal entries, polluting your General Ledger, and completely locks expenses paid by the company.
+                <b>Expense Reset Fix</b> optimizes this process by allowing you to edit expenses without creating reversal entries and unlocks the ability to edit company-paid expenses.
+            </p>
         </div>
     </div>
 </section>
 
 <section class="oe_container oe_dark">
     <div class="oe_row oe_spaced">
-        <h2 class="oe_slogan" style="color:#875A7B;">The Problem</h2>
-        <h3 class="oe_slogan">Why do you need this module?</h3>
         <div class="oe_span12">
-            <p class="oe_mt32 text-justify" style="font-size: 16px;">
-                In the standard Odoo configuration, handling approved expense reports can result in cluttered accounting records:
-            </p>
-            <ul style="font-size: 16px; list-style-type: square; margin-left: 20px;">
-                <li style="margin-bottom: 10px;">
-                    <strong>Reverse Entry Clutter:</strong> When you click "Reset to Draft" on a posted expense report, Odoo creates a <em>Reversal Entry</em> instead of setting the Journal Entry back to draft. This creates two locked entries for a single mistake.
-                </li>
-                <li>
-                    <strong>Orphaned Entries:</strong> When you delete a draft expense report, the associated draft journal entries may remain in the system, causing confusion in the Journal Entries list.
-                </li>
-            </ul>
+            <h3 class="oe_slogan">Key Highlights</h3>
+        </div>
+        <div class="oe_span6">
+            <div class="text-center">
+                <h4><b>No More Reversal Entries</b></h4>
+                <p>
+                    Resetting a posted expense sheet will delete the <b>existing</b> Journal Entry instead of creating a reversal entry. Your ledger remains clean.
+                </p>
+            </div>
+        </div>
+        <div class="oe_span6">
+            <div class="text-center">
+                <h4><b>Single Entry Updates</b></h4>
+                <p>
+                    When you re-post the corrected expense, the module posts the new journal entry. No duplicate records, no clutter, no problem.
+                </p>
+            </div>
+        </div>
+        <div class="oe_span6">
+            <div class="text-center">
+                <h4><b>Unlock "Company Paid" Expenses</b></h4>
+                <p>
+                    Enables the "Reset to Draft" button for expenses marked as <i>Paid By: Company</i>, which are normally locked to the "Done" state in standard Odoo.
+                </p>
+            </div>
+        </div>
+        <div class="oe_span6">
+            <div class="text-center">
+                <h4><b>Automatic Cleanup</b></h4>
+                <p>
+                    If you decide to delete a draft expense sheet, the linked draft journal entry is automatically deleted to prevent orphaned records.
+                </p>
+            </div>
         </div>
     </div>
 </section>
 
 <section class="oe_container">
     <div class="oe_row oe_spaced">
-        <h2 class="oe_slogan" style="color:#875A7B;">The Solution</h2>
-        <h3 class="oe_slogan">How this module fixes it</h3>
-        
+        <h3 class="oe_slogan">How It Works</h3>
         <div class="oe_span12">
-            <div class="alert alert-info">
-                <h4 style="font-weight: bold; color: #31708f;"><i class="fa fa-check-circle"></i> Smart Reset Logic</h4>
-                <p style="margin-top: 10px;">
-                    When you click <b>Reset to Draft</b>, this module intercepts the action. Instead of creating a reverse entry, it locates the original Journal Entry associated with the expense sheet and simply changes its status back to <b>Draft</b>.
+            <div class="alert alert-info" style="padding:15px; border-radius:5px;">
+                <h4 style="margin-top:0;">Scenario 1: Employee (To Reimburse)</h4>
+                <p>
+                    <b>Problem:</b> You post an expense of $15. You realize a mistake and reset it. Odoo creates a -$15 reversal. You add a line and re-post. Odoo creates a new entry. You now have 3 entries for one report.<br/>
+                    <b>Solution:</b> With this module, pulling the expense report back to draft deletes the $15 Journal Entry record and the Payment Record, if one exists. After your changes, re-posting updates that same entry. Result: <b>Only 1 clean entry.</b>
                 </p>
             </div>
             
-            <div class="alert alert-info">
-                <h4 style="font-weight: bold; color: #31708f;"><i class="fa fa-trash"></i> Clean Deletion</h4>
-                <p style="margin-top: 10px;">
-                    When you <b>Delete</b> an expense sheet, the module automatically checks for any linked Journal Entries that are in a 'Draft' state and deletes them simultaneously. This ensures no orphaned data is left behind in your accounting journals.
+            <div class="alert alert-info" style="padding:15px; border-radius:5px; margin-top:20px;">
+                <h4 style="margin-top:0;">Scenario 2: Company (Company Account)</h4>
+                <p>
+                    <b>Problem:</b> Expenses paid by the company move to "Done" state immediately after posting. The "Reset to Draft" button disappears, making corrections impossible.<br/>
+                    <b>Solution:</b> This module brings back the "Reset to Draft" button for company-paid expenses. It applies the same clean logic as Scenario 1, allowing you to modify and re-post without issues.
                 </p>
             </div>
         </div>
-    </div>
-</section>
-
-<section class="oe_container oe_dark">
-    <div class="oe_row oe_spaced">
-        <h2 class="oe_slogan" style="color:#875A7B;">Key Features</h2>
-            <div class="oe_row">
-                <div class="oe_span4">
-                    <div class="text-center">
-                        <span class="fa fa-refresh fa-4x" style="color:#875A7B; margin-bottom: 15px;"></span>
-                        <h4>Revert to Draft</h4>
-                        <p>Moves the original Journal Entry back to draft state instead of creating a reversal.</p>
-                    </div>
-                </div>
-                <div class="oe_span4">
-                    <div class="text-center">
-                        <span class="fa fa-eraser fa-4x" style="color:#875A7B; margin-bottom: 15px;"></span>
-                        <h4>Auto Cleanup</h4>
-                        <p>Automatically deletes associated draft journal entries when the expense sheet is deleted.</p>
-                    </div>
-                </div>
-                <div class="oe_span4">
-                    <div class="text-center">
-                        <span class="fa fa-list-alt fa-4x" style="color:#875A7B; margin-bottom: 15px;"></span>
-                        <h4>Cleaner Ledger</h4>
-                        <p>Keeps your General Ledger clean by avoiding unnecessary debit/credit cancellations.</p>
-                    </div>
-                </div>
-            </div>
     </div>
 </section>
 

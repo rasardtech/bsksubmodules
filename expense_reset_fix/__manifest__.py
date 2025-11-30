@@ -1,12 +1,26 @@
 {
     'name': 'Expense Reset Fix',
-    'version': '17.0.2.0.0',
-    'summary': 'When you save the expense form as a draft, the journal entry is also saved as a draft, when you delete the expense form, the journal entry is also deleted',
+    'version': '17.0.3.0.0',
+    'summary': 'Prevents reversal journal entries when resetting expense sheets and enables editing for company-paid expenses.',
     'description': """
-        In Odoo's default configuration, when you approve an expense form, a journal entry is created.
-        When you convert the expense form to draft, the journal entry is not converted to draft; instead, a reverse entry is created.
-        When you delete the expense form, these journal entries are not deleted either.
-        With this module, when you convert the expense form to draft, instead of creating a reverse journal entry, the initially created journal entry is converted to draft, and when you delete the expense form, the journal entry is also deleted.
+Expense Reset Fix & Clean Journal Entries
+=========================================
+
+This module improves the standard Odoo Expense workflow by preventing the creation of unnecessary "Reversal" journal entries and allowing more flexibility for company-paid expenses.
+
+Key Features
+------------
+1. Prevent Reversal Entries (Ledger Pollution):
+   - In standard Odoo, resetting a posted expense sheet to "Draft" creates a reversal journal entry. Re-posting it creates a third entry.
+   - With this module, resetting an expense sheet deletes the *existing* Journal Entry.
+   - When re-posted, the existing entry is updated, keeping your General Ledger clean with a single entry per expense report.
+
+2. Edit "Company Paid" Expenses:
+   - Standard Odoo locks expenses paid by the Company (Paid By: Company) to the "Done" state immediately after posting, disabling the "Reset to Draft" button.
+   - This module enables the "Reset to Draft" button for company-paid expenses, allowing you to correct mistakes using the same clean logic (updating the existing journal entry) as above.
+
+3. Auto-Cleanup:
+   - If a draft expense sheet is deleted, the associated journal entry is automatically deleted.
     """,
     'category': 'Accounting',
     'author': 'Burak Şipşak',
@@ -14,9 +28,10 @@
     'license': 'LGPL-3',
     'depends': ['hr_expense', 'account'],
     'images': ['images/main_screenshot.png'],
-    'data': [],
+    'data': [
+        'views/hr_expense_sheet_views.xml',
+    ],
     'installable': True,
     'auto_install': False,
     'application': False,
 }
-

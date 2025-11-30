@@ -1,22 +1,37 @@
-from odoo import models
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
 
 class HrExpenseSheet(models.Model):
     _inherit = 'hr.expense.sheet'
 
     def action_reset_expense_sheets(self):
         for sheet in self:
-            if sheet.account_move_ids:
-                sheet.account_move_ids.button_draft()
-        return self.write({'state': 'draft', 'approval_date': False, 'user_id': False})
+            moves_to_delete = sheet.account_move_ids
+            
+            for move in sheet.account_move_ids:
+                for line in move.line_ids:
+                    moves_to_delete |= line.matched_debit_ids.debit_move_id.move_id
+                    moves_to_delete |= line.matched_credit_ids.credit_move_id.move_id
+            
+            if moves_to_delete:
+                moves_to_delete.button_draft()
+                moves_to_delete.unlink()
+            
+            if sheet.state == 'done':
+                sheet.write({'state': 'post'}) 
 
-    def action_submit_sheet(self):
-        res = super().action_submit_sheet()
-        self.mapped('account_move_ids').filtered(lambda m: m.state == 'draft').action_post()
+        return super(HrExpenseSheet, self).action_reset_expense_sheets()
+
+    def action_sheet_move_create(self):
+        for sheet in self:
+            draft_moves = sheet.account_move_ids.filtered(lambda m: m.state == 'draft')
+            draft_moves.unlink()
+        
+        res = super(HrExpenseSheet, self).action_sheet_move_create()
         return res
 
     def unlink(self):
-        moves_to_delete = self.mapped('account_move_ids').filtered(lambda m: m.state == 'draft')
-        res = super().unlink()
-        if moves_to_delete:
-            moves_to_delete.unlink()
-        return res
+        for sheet in self:
+            draft_moves = sheet.account_move_ids.filtered(lambda m: m.state == 'draft')
+            draft_moves.unlink()
+        return super(HrExpenseSheet, self).unlink()
