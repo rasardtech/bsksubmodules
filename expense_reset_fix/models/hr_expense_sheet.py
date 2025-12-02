@@ -14,7 +14,8 @@ class HrExpenseSheet(models.Model):
                     moves_to_delete |= line.matched_credit_ids.credit_move_id.move_id
             
             if moves_to_delete:
-                moves_to_delete.button_draft()
+                for move in moves_to_delete:
+                    move.button_draft()
                 moves_to_delete.unlink()
             
             if sheet.state == 'done':

@@ -1,6 +1,6 @@
 {
     'name': 'Expense Reset Fix',
-    'version': '17.0.3.0.0',
+    'version': '17.0.4.0.0',
     'summary': 'Prevents reversal journal entries when resetting expense sheets and enables editing for company-paid expenses.',
     'description': """
 Expense Reset Fix & Clean Journal Entries
