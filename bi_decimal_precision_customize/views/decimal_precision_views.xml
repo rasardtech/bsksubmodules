@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_decimal_precision_form" model="ir.ui.view">
+        <field name="name">decimal.precision.form</field>
+        <field name="model">decimal.precision</field>
+        <field name="inherit_id" ref="base.view_decimal_precision_form"/>
+        <field name="arch" type="xml">
+            <field name="digits" position="after">
+                <field name="format_type"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_decimal_precision_tree" model="ir.ui.view">
+        <field name="name">decimal.precision.tree</field>
+        <field name="model">decimal.precision</field>
+        <field name="inherit_id" ref="base.view_decimal_precision_tree"/>
+        <field name="arch" type="xml">
+            <field name="digits" position="after">
+                <field name="format_type"/>
+            </field>
+        </field>
+    </record>
+</odoo>
