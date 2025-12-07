@@ -1,0 +1,47 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* simplified_decimal_display
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#. module: simplified_decimal_display
+#: model:ir.model,name:simplified_decimal_display.model_decimal_precision
+msgid "Decimal Precision"
+msgstr "Ondalık Hassasiyeti"
+
+#. module: simplified_decimal_display
+#: model:ir.model,name:simplified_decimal_display.model_ir_model_fields
+msgid "Fields"
+msgstr "Alanlar"
+
+#. module: simplified_decimal_display
+#: model:ir.model.fields,field_description:simplified_decimal_display.field_decimal_precision__format_type
+msgid "Format Type"
+msgstr "Biçim Türü"
+
+#. module: simplified_decimal_display
+#: model:ir.model,name:simplified_decimal_display.model_ir_http
+msgid "HTTP Routing"
+msgstr "HTTP Yönlendirme"
+
+#. module: simplified_decimal_display
+#: model:ir.model.fields.selection,name:simplified_decimal_display.selection__decimal_precision__format_type__monetary
+msgid "Monetary"
+msgstr "Parasal"
+
+#. module: simplified_decimal_display
+#: model:ir.model.fields.selection,name:simplified_decimal_display.selection__decimal_precision__format_type__quantitative
+msgid "Quantitative"
+msgstr "Nicel"
+
+#. module: simplified_decimal_display
+#: model:ir.model.fields,help:simplified_decimal_display.field_decimal_precision__format_type
+msgid ""
+"Quantitative: Strip all trailing zeros.\n"
+"Monetary: Strip trailing zeros but keep minimum 2 decimals."
+msgstr ""
+"Nicel: Sondaki tüm sıfırları kaldır.\n"
+"Parasal: Sondaki tüm sıfırları kaldır, fakat en az 2 haneyi tut."

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simplified Decimal Display</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet">
+</head>
+<body style="font-family: 'Montserrat', sans-serif;">
+
+<section class="oe_container">
+    <div class="test" style="text-align: center; padding: 40px 0;">
+        <h2 class="oe_slogan" style="color: #875A7B; font-weight: 700;">Simplified Decimal Display</h2>
+        <h3 class="oe_slogan" style="font-weight: 400;">Intelligent Decimal Precision Formatting for Odoo</h3>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="oe_slogan" style="margin-top: 20px;">
+                <p>
+                    Transform how your Odoo instance displays numbers. This module introduces a smart formatting system that automatically adjusts decimal precision based on the context of the value—quantitative or monetary.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default" style="border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; text-align: center;">
+                <div class="panel-body">
+                    <i class="fa fa-calculator fa-3x" style="color: #875A7B;"></i>
+                    <h4 style="margin-top: 20px; font-weight: 600;">Quantitative Values</h4>
+                    <p>Automatically strips all trailing zeros for cleaner display.</p>
+                    <p class="text-muted">
+					Example: 10.12300 &rarr; 10.123<br>
+					Example: 10.12000 &rarr; 10.12<br>
+					Example: 10.10000 &rarr; 10.1<br>
+					Example: 10.00000 &rarr; 10
+					</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default" style="border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; text-align: center;">
+                <div class="panel-body">
+                    <i class="fa fa-money fa-3x" style="color: #00A09D;"></i>
+                    <h4 style="margin-top: 20px; font-weight: 600;">Monetary Values</h4>
+                    <p>Maintains a minimum of 2 decimal places for financial accuracy.</p>
+                    <p class="text-muted">
+					Example: $10.12300 &rarr; $10.123<br>
+					Example: $10.12000 &rarr; $10.12<br>
+					Example: $10.10000 &rarr; $10.10<br>
+					Example: $10.00000 &rarr; $10.00
+					</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-warning" style="margin-top: 40px; text-align: center; border-radius: 0;">
+                <i class="fa fa-exclamation-triangle fa-2x"></i>
+                <h4 style="margin-top: 10px; font-weight: 700;">IMPORTANT</h4>
+                <p>If you uninstall this module, you <strong>must restart the Odoo server</strong> to revert the decimal formatting changes correctly.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="row" style="margin-top: 40px;">
+        <div class="col-md-12 text-center">
+            <h3 class="oe_slogan">Support & Configuration</h3>
+            <p>
+                This module works out-of-the-box with support for both dot and comma decimal separators.
+                No complex configuration required.
+            </p>
+             <p>
+                Developed by <strong>Burak Şipşak</strong>
+            </p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
