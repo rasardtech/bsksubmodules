@@ -17,7 +17,7 @@ def get_description(self, env, attributes=None):
         precision_name = digits
         
         try:
-            dp = env['decimal.precision'].search([('name', '=', precision_name)], limit=1)
+            dp = env['decimal.precision'].sudo().search([('name', '=', precision_name)], limit=1)
             if dp:
                 format_type = dp.format_type
                 numeric_digits = (16, dp.digits)

@@ -1,6 +1,6 @@
 {
     'name': 'Simplified Decimal Display',
-    'version': '17.0.1.0.0',
+    'version': '17.0.1.0.1',
     'category': 'Productivity',
     'summary': 'Customize decimal precision formatting for quantitative and monetary fields.',
     'description': """
