@@ -1,0 +1,26 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mrp_bom_location_filter
+#
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#. module: mrp_bom_location_filter
+#. odoo-javascript
+#: code:addons/mrp_bom_location_filter/static/src/xml/mrp_bom_report_filter.xml:0
+#, python-format
+msgid "All Locations"
+msgstr "Tüm Konumlar"
+
+#. module: mrp_bom_location_filter
+#: model:ir.model,name:mrp_bom_location_filter.model_report_mrp_report_bom_structure
+msgid "BOM Overview Report"
+msgstr "BOM Genel Bakış Raporu"
+
+#. module: mrp_bom_location_filter
+#. odoo-javascript
+#: code:addons/mrp_bom_location_filter/static/src/xml/mrp_bom_report_filter.xml:0
+#, python-format
+msgid "Location"
+msgstr "Konum"

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="mrp_bom_location_filter.LocationFilterInherit" t-inherit="mrp.BomOverviewControlPanel" t-inherit-mode="extension" owl="1">
+        
+        <xpath expr="//div[hasclass('col', 'd-flex', 'gap-1')]/t[@t-if='props.warehouses.length &gt; 1']" position="before">
+            
+            <t t-if="locationState and locationState.locations and locationState.locations.length">
+                <Dropdown class="'btn-group flex-grow-1 flex-md-grow-0'" togglerClass="'btn btn-secondary'" showCaret="true">
+                    
+                    <t t-set-slot="toggler">
+                        <span class="fa fa-map-marker"></span>
+                        <t t-if="locationState.selectedLocationId">
+                            <t t-esc="selectedLocationName"/>
+                        </t>    
+                        <t t-else="">
+                            Location
+                        </t>
+                    </t>
+                    
+                    <DropdownItem class="{ selected: !locationState.selectedLocationId }" onSelected="() => this.onLocationSelected(false)">
+                        All Locations
+                    </DropdownItem>
+                    
+                    <t t-foreach="locationState.locations" t-as="loc" t-key="loc.id">
+                        <DropdownItem class="{ selected: locationState.selectedLocationId === loc.id }" onSelected="() => this.onLocationSelected(loc.id)">
+                            <t t-esc="loc.display_name"/>
+                        </DropdownItem>
+                    </t>
+                </Dropdown>
+            </t>
+            
+        </xpath>
+        
+    </t>
+</templates>
