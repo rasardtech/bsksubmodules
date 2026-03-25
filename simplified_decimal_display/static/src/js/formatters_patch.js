@@ -8,8 +8,15 @@ import { registry } from "@web/core/registry";
 import { session } from "@web/session";
 
 function formatLogic(formattedValue, options = {}, defaultType) {
-    if (!formattedValue) {
+    // Only treat undefined/null as empty. Numbers (0) and other falsy values
+    // should be preserved and converted to string for matching.
+    if (formattedValue === undefined || formattedValue === null) {
         return "";
+    }
+    // Ensure we operate on a string (match() is a string method). If the
+    // formattedValue is already a string, this is a no-op.
+    if (typeof formattedValue !== 'string') {
+        formattedValue = String(formattedValue);
     }
 
     let formatType = options && options.format_type ? options.format_type : defaultType;
