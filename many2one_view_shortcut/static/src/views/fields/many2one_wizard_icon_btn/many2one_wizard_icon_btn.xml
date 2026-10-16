@@ -1,53 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<templates xml:space="preserve" owl="1">
-    <t t-inherit="web.Many2OneField" t-inherit-mode="extension">
-        <xpath expr="//t[@t-if='props.readonly']/t[@t-else='']/a/span" position="after">
-            <t t-if="hasExternalButton">
-                    <button
-                        type="button"
-                        class="btn btn-link text-action oi o_external_button oi-view"
-                        tabindex="-1"
-                        draggable="false"
-                        aria-label="Open Wizard"
-                        data-tooltip="Open Wizard"
-                        t-on-click="onExternalWizardBtnClick"
-                    />
-                </t>
-                <t t-if="hasExternalButton">
-                    <button
-                        type="button"
-                        class="btn btn-link text-action oi o_external_button oi-launch"
-                        tabindex="-1"
-                        draggable="false"
-                        aria-label="Open Link"
-                        data-tooltip="Open Link"
-                        t-on-click="onExternalNewTabBtnClick"
-                    />
-                </t>
+<templates xml:space="preserve">
+    <!-- 19.0: hedef şablon web.Many2OneField değil web.Many2One (readonly + edit aynı şablonda). -->
+    <t t-inherit="web.Many2One" t-inherit-mode="extension">
+        <!-- Salt okunur mod: kayıt bağlantısının yanında -->
+        <xpath expr="//a[hasclass('o_form_uri')]" position="after">
+            <span t-if="hasLinkButton" class="o_m2o_view_shortcut d-inline-flex flex-shrink-0">
+                <button
+                    type="button"
+                    class="btn btn-link text-action oi o_external_button oi-view"
+                    tabindex="-1"
+                    draggable="false"
+                    aria-label="Open Wizard"
+                    data-tooltip="Open Wizard"
+                    t-on-click="onExternalWizardBtnClick"
+                />
+                <button
+                    type="button"
+                    class="btn btn-link text-action oi o_external_button oi-launch"
+                    tabindex="-1"
+                    draggable="false"
+                    aria-label="Open Link"
+                    data-tooltip="Open Link"
+                    t-on-click="onExternalNewTabBtnClick"
+                />
+            </span>
         </xpath>
-        <xpath expr="//div[@class='o_field_many2one_selection']" position="inside">
-                <t t-if="hasExternalButton">
-                    <button
-                        type="button"
-                        class="btn btn-link text-action oi o_external_button oi-view"
-                        tabindex="-1"
-                        draggable="false"
-                        aria-label="Open Wizard"
-                        data-tooltip="Open Wizard"
-                        t-on-click="onExternalWizardBtnClick"
-                    />
-                </t>
-                <t t-if="hasExternalButton">
-                    <button
-                        type="button"
-                        class="btn btn-link text-action oi o_external_button oi-launch"
-                        tabindex="-1"
-                        draggable="false"
-                        aria-label="Open Link"
-                        data-tooltip="Open Link"
-                        t-on-click="onExternalNewTabBtnClick"
-                    />
-                </t>
+        <!-- Düzenleme modu: standart bağlantı butonundan sonra -->
+        <xpath expr="//div[hasclass('o_field_many2one_selection')]" position="inside">
+            <t t-if="hasLinkButton">
+                <button
+                    type="button"
+                    class="btn btn-link text-action oi o_external_button oi-view"
+                    tabindex="-1"
+                    draggable="false"
+                    aria-label="Open Wizard"
+                    data-tooltip="Open Wizard"
+                    t-on-click="onExternalWizardBtnClick"
+                />
+                <button
+                    type="button"
+                    class="btn btn-link text-action oi o_external_button oi-launch"
+                    tabindex="-1"
+                    draggable="false"
+                    aria-label="Open Link"
+                    data-tooltip="Open Link"
+                    t-on-click="onExternalNewTabBtnClick"
+                />
+            </t>
         </xpath>
     </t>
 </templates>

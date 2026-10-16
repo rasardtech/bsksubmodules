@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models, _
+from odoo import models
 
 class Many2oneInherit(models.AbstractModel):
     _inherit = "base"
@@ -12,7 +12,10 @@ class Many2oneInherit(models.AbstractModel):
             if self.product_tmpl_id:
                 model_name = 'product.template'
                 record_id = self.product_tmpl_id.id
-        redirect_url = f"/web#id={record_id}&model={model_name}&view_type=form"
+        # 19.0: /web#id=..&model=.. eski URL hâlâ yönlenir; doğrudan yeni biçim
+        # (web Many2One.linkHref ile aynı: noktasız model adına "m-" öneki).
+        url_model = model_name if "." in model_name else f"m-{model_name}"
+        redirect_url = f"/odoo/{url_model}/{record_id}"
         return {
             'type': 'ir.actions.act_url',
             'url': redirect_url,
@@ -35,7 +38,7 @@ class Many2oneInherit(models.AbstractModel):
             'views': [(view_id, 'form')],
             'target': 'new',
             'res_id': record_id,
-            'context': dict(self._context),
+            'context': dict(self.env.context),
         }
 
 

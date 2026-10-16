@@ -1,31 +1,19 @@
-/** @odoo-module **/
-
 import { patch } from "@web/core/utils/patch";
-import * as BomOverviewModule from "@mrp/components/bom_overview/mrp_bom_overview";
+import { useBus } from "@web/core/utils/hooks";
+import { BomOverviewComponent } from "@mrp/components/bom_overview/mrp_bom_overview";
 
-const BomOverview = BomOverviewModule.BomOverviewComponent || BomOverviewModule.BomOverview || BomOverviewModule.default;
+// 19.0: bileşen adı BomOverviewComponent (17'deki farklı export adları
+// denemesine gerek yok). Bus dinleyicisi useBus ile (unmount'ta temizlenir).
+patch(BomOverviewComponent.prototype, {
+    setup() {
+        super.setup();
+        useBus(this.env.overviewBus, "change-location", (ev) => this.onChangeLocation(ev));
+    },
 
-if (BomOverview) {
-    patch(BomOverview.prototype, {
-        setup() {
-            super.setup();
-            if (this.env.overviewBus) {
-                this.env.overviewBus.addEventListener("change-location", this.onChangeLocation.bind(this));
-            }
-        },
-
-        async onChangeLocation(ev) {
-            const locationId = ev.detail;
-
-            if (this.props.action && this.props.action.context) {
-                this.props.action.context.bom_location_id = locationId;
-            }
-
-            if (this.getBomData) {
-                await this.getBomData();
-            } else if (this.reload) {
-                await this.reload(); 
-            }
-        }
-    });
-}
+    async onChangeLocation(ev) {
+        // this.context === this.props.action.context (aynı nesne); getBomData
+        // bunu kopyalayıp get_html'e gönderir, python tarafı 'location'a çevirir.
+        this.props.action.context.bom_location_id = ev.detail;
+        await this.getBomData();
+    },
+});

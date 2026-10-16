@@ -8,7 +8,7 @@
     'author': "Shahid Khan",
     'website': "https://github.com/shahid-0",
     'category': 'Customizations',
-    "version": "17.0.1.0.2",
+    "version": "19.0.1.0.2",
     'depends': ['base', 'web'],
     'data': [],
     'assets': {

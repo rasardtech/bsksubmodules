@@ -1,25 +1,17 @@
-/** @odoo-module **/
-
+import { onWillStart, useState } from "@odoo/owl";
+import { _t } from "@web/core/l10n/translation";
+import { useService } from "@web/core/utils/hooks";
 import { patch } from "@web/core/utils/patch";
 import { BomOverviewControlPanel } from "@mrp/components/bom_overview_control_panel/mrp_bom_overview_control_panel";
-import { useService } from "@web/core/utils/hooks";
-import { useState, onWillStart } from "@odoo/owl";
 
 patch(BomOverviewControlPanel.prototype, {
     setup() {
         super.setup(...arguments);
         this.orm = useService("orm");
 
-        let initialLoc = false;
-        if (this.env.config && this.env.config.actionContext) {
-             initialLoc = this.env.config.actionContext.bom_location_id || false;
-        } else if (this.props.context) {
-             initialLoc = this.props.context.bom_location_id || false;
-        }
-
         this.locationState = useState({
             locations: [],
-            selectedLocationId: initialLoc
+            selectedLocationId: false,
         });
 
         onWillStart(async () => {
@@ -29,25 +21,46 @@ patch(BomOverviewControlPanel.prototype, {
 
     async fetchLocations() {
         try {
-            const domain = [['usage', '=', 'internal']];
-            this.locationState.locations = await this.orm.searchRead('stock.location', domain, ['id', 'display_name']);
-        } catch (e) {
+            const domain = [["usage", "=", "internal"]];
+            this.locationState.locations = await this.orm.searchRead("stock.location", domain, [
+                "id",
+                "display_name",
+            ]);
+        } catch {
+            // Konum okuma yetkisi yoksa filtre gösterilmez (17 davranışı).
+            this.locationState.locations = [];
         }
     },
 
     onLocationSelected(locationId) {
         const targetLocationId = locationId || false;
-        
         this.locationState.selectedLocationId = targetLocationId;
-        
-        if (this.env.overviewBus) {
-             this.env.overviewBus.trigger("change-location", targetLocationId);
-        }
+        this.env.overviewBus?.trigger("change-location", targetLocationId);
     },
 
     get selectedLocationName() {
-        if (!this.locationState.selectedLocationId) return " Location";
-        const loc = this.locationState.locations.find(l => l.id === this.locationState.selectedLocationId);
-        return loc ? "\u00A0" + loc.display_name : " Location";
-    }
+        const selectedId = this.locationState.selectedLocationId;
+        const loc = selectedId && this.locationState.locations.find((l) => l.id === selectedId);
+        return loc ? loc.display_name : _t("Location");
+    },
+
+    // 19.0: Dropdown toggler/DropdownItem slot API'si yerine items listesi
+    // (standart warehousesItems ile aynı yapı).
+    get locationItems() {
+        const selectedId = this.locationState.selectedLocationId;
+        return [
+            {
+                id: 0,
+                label: _t("All Locations"),
+                class: { selected: !selectedId },
+                onSelected: () => this.onLocationSelected(false),
+            },
+            ...this.locationState.locations.map((loc) => ({
+                id: loc.id,
+                label: loc.display_name,
+                class: { selected: selectedId === loc.id },
+                onSelected: () => this.onLocationSelected(loc.id),
+            })),
+        ];
+    },
 });

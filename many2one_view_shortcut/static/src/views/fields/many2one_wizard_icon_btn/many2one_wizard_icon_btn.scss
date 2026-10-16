@@ -1,0 +1,5 @@
+// Salt okunur modda bağlantı (w-100) ile butonlar aynı satırda kalsın.
+.o_many2one:has(> .o_m2o_view_shortcut) {
+    display: flex;
+    align-items: center;
+}

@@ -1,6 +1,6 @@
 {
     'name': 'Expense Reset Fix',
-    'version': '17.0.4.0.0',
+    'version': '19.0.4.0.0',
     'summary': 'Prevents reversal journal entries when resetting expense sheets and enables editing for company-paid expenses.',
     'description': """
 Expense Reset Fix & Clean Journal Entries
@@ -11,16 +11,18 @@ This module improves the standard Odoo Expense workflow by preventing the creati
 Key Features
 ------------
 1. Prevent Reversal Entries (Ledger Pollution):
-   - In standard Odoo, resetting a posted expense sheet to "Draft" creates a reversal journal entry. Re-posting it creates a third entry.
-   - With this module, resetting an expense sheet deletes the *existing* Journal Entry.
-   - When re-posted, the existing entry is updated, keeping your General Ledger clean with a single entry per expense report.
+   - In standard Odoo 19, an expense linked to a posted journal entry cannot be reset to draft.
+   - With this module, resetting an expense deletes the *existing* Journal Entry (and the
+     payments/counterpart entries reconciled with it) instead of reversing it.
+   - When re-posted, a single new entry is created, keeping your General Ledger clean.
 
 2. Edit "Company Paid" Expenses:
-   - Standard Odoo locks expenses paid by the Company (Paid By: Company) to the "Done" state immediately after posting, disabling the "Reset to Draft" button.
-   - This module enables the "Reset to Draft" button for company-paid expenses, allowing you to correct mistakes using the same clean logic (updating the existing journal entry) as above.
+   - Company-paid expenses go to the "Paid" state immediately after posting.
+   - This module allows resetting them with the same clean logic (the payment and its
+     journal entry are deleted).
 
-3. Auto-Cleanup:
-   - If a draft expense sheet is deleted, the associated journal entry is automatically deleted.
+Note (19.0): expense sheets (hr.expense.sheet) no longer exist; the logic applies to
+hr.expense. Draft entry cleanup on re-post / delete is handled by standard Odoo 19.
     """,
     'category': 'Accounting',
     'author': 'Burak Şipşak',
@@ -28,9 +30,7 @@ Key Features
     'license': 'LGPL-3',
     'depends': ['hr_expense', 'account'],
     'images': ['images/main_screenshot.png'],
-    'data': [
-        'views/hr_expense_sheet_views.xml',
-    ],
+    'data': [],
     'installable': True,
     'auto_install': False,
     'application': False,

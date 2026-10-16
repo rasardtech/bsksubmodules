@@ -1,6 +1,6 @@
 {
     'name': 'BoM Overview Location Filter',
-    'version': '17.0.1.0.0',
+    'version': '19.0.1.0.0',
     'category': 'Manufacturing',
     'summary': 'Adds location-based filtering to the BoM Overview screen.',
     'author': 'Burak Şipşak',
